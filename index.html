@@ -177,7 +177,11 @@
   .social-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);opacity:.9;}
   .social-card:hover{transform:translateY(-6px);border-color:rgba(212,161,58,.5);box-shadow:0 24px 50px rgba(0,0,0,.35);}
   .social-card .tweet-embed{min-height:120px;}
+  .social-grid .social-card.insta{background:#111;border-color:rgba(255,255,255,.12);}
+  .social-card .ig-embed{width:100%;}
+  .social-card .ig-embed iframe{width:100%;border:0;border-radius:14px;min-height:560px;background:#fff;}
   .sec-desc{margin-top:18px;color:rgba(255,255,255,.6);font-size:1.02rem;max-width:60ch;line-height:1.6;}
+  .sec-subtitle{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:800;margin-top:6px;}
   .social-note{grid-column:1/-1;text-align:center;color:rgba(255,255,255,.5);font-size:.85rem;margin-top:6px;}
   .social-note a{color:var(--accent-2);font-weight:600;}
 
@@ -478,8 +482,13 @@
   <div class="section-inner cinema-enter">
     <div class="sec-head reveal">
       <span class="eyebrow">Sosyal Medya</span>
-      <h2 class="sec-title cinema-title"><span class="mask"><span class="line">X'te neler paylaşıyorum?</span></span></h2>
-      <p class="sec-desc">@erimonan hesabından son paylaşımlar — canlı akış.</p>
+      <h2 class="sec-title cinema-title"><span class="mask"><span class="line">Sosyal medyada ben</span></span></h2>
+      <p class="sec-desc">Son paylaşımlar — X (@erimonan) ve Instagram (@erim.onan).</p>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:70px;">
+      <span class="eyebrow">X (Twitter)</span>
+      <h3 class="sec-subtitle">Son paylaşımlarım</h3>
     </div>
     <div class="social-grid">
       <div class="social-card reveal">
@@ -510,16 +519,29 @@
           </blockquote>
         </div>
       </div>
-      <div class="social-card reveal">
-        <div class="tweet-embed">
-          <blockquote class="twitter-tweet" data-dnt="true">
-            <a href="https://x.com/erimonan/status/1777373855004160069"></a>
-          </blockquote>
-        </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:70px;">
+      <span class="eyebrow">Instagram</span>
+      <h3 class="sec-subtitle">Son paylaşımlarım</h3>
+    </div>
+    <div class="social-grid">
+      <div class="social-card insta reveal">
+        <div class="ig-embed"><iframe src="https://www.instagram.com/reel/DVyTd2GCD2Q/embed" scrolling="no" frameborder="0" loading="lazy" title="Instagram paylaşımı"></iframe></div>
       </div>
-      <div class="social-note reveal">
-        Tüm paylaşımlar için <a href="https://x.com/erimonan" target="_blank">@erimonan →</a>
+      <div class="social-card insta reveal">
+        <div class="ig-embed"><iframe src="https://www.instagram.com/reel/DU_Mv-FCBZX/embed" scrolling="no" frameborder="0" loading="lazy" title="Instagram paylaşımı"></iframe></div>
       </div>
+      <div class="social-card insta reveal">
+        <div class="ig-embed"><iframe src="https://www.instagram.com/reel/DU3TE2IiHhE/embed" scrolling="no" frameborder="0" loading="lazy" title="Instagram paylaşımı"></iframe></div>
+      </div>
+      <div class="social-card insta reveal">
+        <div class="ig-embed"><iframe src="https://www.instagram.com/reel/DTAHxgZCCKs/embed" scrolling="no" frameborder="0" loading="lazy" title="Instagram paylaşımı"></iframe></div>
+      </div>
+    </div>
+
+    <div class="social-note reveal">
+      Tüm paylaşımlar için <a href="https://x.com/erimonan" target="_blank">@erimonan →</a> ve <a href="https://www.instagram.com/erim.onan/" target="_blank">@erim.onan →</a>
     </div>
   </div>
 </section>
