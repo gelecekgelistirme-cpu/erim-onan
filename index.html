@@ -97,9 +97,6 @@
   .hero-portrait-wrap::before{content:"";position:absolute;inset:-8%;background:radial-gradient(circle at 60% 30%,rgba(232,196,107,.18),transparent 55%);pointer-events:none;}
   .hero-portrait{width:min(100%,420px);height:auto;opacity:0;animation:fadeIn 1.4s ease forwards;animation-delay:1.8s;filter:drop-shadow(0 30px 60px rgba(212,161,58,.15));will-change:transform;display:block;}
   @keyframes fadeIn{to{opacity:1;}}
-  .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);}
-  .scroll-cue::after{content:"";display:block;width:1px;height:36px;background:linear-gradient(var(--accent),transparent);margin:12px auto 0;animation:cue 1.8s infinite;}
-  @keyframes cue{0%,100%{transform:scaleY(.5);opacity:.4;}50%{transform:scaleY(1);opacity:1;}}
 
   /* ===== BÖLÜM BAŞLIKLARI (mask reveal) ===== */
   .section{padding:120px 42px;position:relative;overflow:hidden;}
@@ -333,7 +330,6 @@
     </div>
     <div class="hero-portrait-wrap"><img class="hero-portrait" src="hero-dikey-2.png" alt="Erim ONAN — Dijital Dönüşüm &amp; Verimlilik Danışmanı portresi" width="555" height="806" fetchpriority="high"></div>
   </div>
-  <div class="scroll-cue">Keşfet</div>
 </header>
 
 <!-- YAZILAR -->
