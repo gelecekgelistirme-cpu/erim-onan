@@ -87,10 +87,11 @@
   .btn-gold:hover{transform:translateY(-3px);box-shadow:0 20px 55px rgba(212,161,58,.5);}
   .btn-ghost{border:1.5px solid rgba(255,255,255,.4);color:#fff;}
   .btn-ghost:hover{background:rgba(255,255,255,.1);}
-  .hero-meta{display:flex;gap:50px;margin-top:70px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:30px;}
-  .hm{display:flex;flex-direction:column;gap:4px;}
-  .hm .num{font-size:1.9rem;font-weight:800;color:var(--accent-2);line-height:1;}
-  .hm .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+  .hero-meta{display:flex;gap:44px;margin-top:70px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:34px;}
+  .hm{display:flex;align-items:center;gap:12px;}
+  .hm::before{content:"";width:10px;height:10px;background:var(--gold-grad);border-radius:50%;flex-shrink:0;box-shadow:0 0 0 4px rgba(212,161,58,.15);}
+  .hm p{font-size:.98rem;font-weight:500;color:rgba(255,255,255,.85);max-width:26ch;line-height:1.5;}
+  .hm strong{color:var(--accent-2);font-weight:700;}
   .hero-portrait{position:absolute;right:2%;bottom:4%;width:clamp(280px,31vw,460px);height:auto;opacity:0;animation:fadeIn 1.4s ease forwards;animation-delay:1.8s;pointer-events:none;filter:drop-shadow(0 40px 80px rgba(0,0,0,.6));will-change:transform;}
   @keyframes fadeIn{to{opacity:1;}}
   .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);}
@@ -298,10 +299,10 @@
     </div>
 
     <div class="hero-meta">
-      <div class="hm"><span class="num">25</span><span class="lbl">Yıl Kurumsal Kariyer</span></div>
-      <div class="hm"><span class="num">23+</span><span class="lbl">Yıl FMCG &amp; Satış Deneyimi</span></div>
-      <div class="hm"><span class="num">59+</span><span class="lbl">Köşe Yazısı</span></div>
-      <div class="hm"><span class="num">4</span><span class="lbl">Uluslararası Firma</span></div>
+      <div class="hm"><p>Uluslararası <strong>kurumsal kariyer</strong> — çeyrek asır</p></div>
+      <div class="hm"><p><strong>FMCG &amp; satış</strong> cephesinde derin deneyim</p></div>
+      <div class="hm"><p><strong>59+ köşe yazısı</strong> — kalem hiç susmadı</p></div>
+      <div class="hm"><p>Unilever, La Lorraine ve <strong>daha fazlası</strong></p></div>
     </div>
   </div>
   <img class="hero-portrait" src="hero-dikey.png" alt="Erim ONAN" width="644" height="806" fetchpriority="high">
