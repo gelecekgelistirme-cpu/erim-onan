@@ -1,0 +1,23 @@
+# Python virtual env & tooling
+.venv-img/
+__pycache__/
+*.pyc
+
+# Image processing scripts
+process_img.py
+check_alpha.py
+find_bounds.py
+crop_portrait.py
+cutout.py
+crop_hero.py
+crop_bio.py
+
+# Source / working images (not needed on the live site)
+erim-2026-hires.png
+erim-ocak25.jpg
+erim-20261.png
+
+# Local env / OS
+.env
+.DS_Store
+Thumbs.db

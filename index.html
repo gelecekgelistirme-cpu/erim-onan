@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erim ONAN — Gazeteci · Yazar · Dijital Dönüşüm Danışmanı</title>
+<meta name="description" content="Erim ONAN — Gelecek Yönetim Gazetesi İmtiyaz Sahibi, Gazeteci, Yazar ve Dijital Dönüşüm &amp; Verimlilik Danışmanı. Bugünü anlamak, yarını yönetmek için.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b1b33;
+    --navy-2:#10294d;
+    --accent:#d4a13a;
+    --accent-2:#e8c46b;
+    --ink:#0c1626;
+    --paper:#f6f4ef;
+    --muted:#5c6b7a;
+    --gold-grad:linear-gradient(135deg,#d4a13a,#e8c46b);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  ::selection{background:var(--accent);color:var(--navy);}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+
+  /* Mask reveal helper */
+  .mask{display:inline-block;overflow:hidden;vertical-align:top;}
+  .mask > .line{display:block;transform:translateY(110%);transition:transform 1.1s cubic-bezier(.16,1,.3,1);}
+  .mask.in-view > .line{transform:translateY(0);}
+
+  .eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent-2);font-weight:600;}
+
+  /* ===== NAV (minimal, sabit) ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:26px 42px;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:normal;transition:background .4s,padding .4s;}
+  nav.scrolled{background:rgba(11,27,51,.85);backdrop-filter:blur(16px);padding:18px 42px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .nav-brand{font-weight:800;font-size:1rem;letter-spacing:.02em;}
+  .nav-brand em{font-style:normal;color:var(--accent-2);}
+  .nav-links{display:flex;align-items:center;gap:30px;}
+  .nav-links a{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.75);transition:color .2s;}
+  .nav-links a:hover{color:var(--accent-2);}
+  .nav-btn{background:var(--gold-grad);color:var(--navy) !important;font-weight:700;padding:11px 24px;border-radius:100px;letter-spacing:.04em;}
+  .nav-btn:hover{color:var(--navy) !important;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;align-items:center;justify-content:center;}
+  .burger span{width:24px;height:2px;background:#fff;transition:transform .3s,opacity .3s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ===== HERO (dev tipografi, kelime animasyonu) ===== */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 42px 60px;position:relative;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:70px 70px;opacity:.6;pointer-events:none;will-change:transform;}
+  .hero-glow{position:absolute;top:-20%;right:-10%;width:50vw;height:60vh;background:radial-gradient(circle,rgba(212,161,58,.16),transparent 60%);pointer-events:none;will-change:transform;}
+  .hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%;}
+  .hero-eyebrow{margin-bottom:40px;}
+  .hero-title{font-size:clamp(3rem,8.5vw,7.2rem);font-weight:900;line-height:1.02;letter-spacing:-.02em;max-width:15ch;}
+  .hero-title .accent{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero-title .word{display:inline-block;overflow:hidden;vertical-align:bottom;}
+  .hero-title .word > .w{display:inline-block;transform:translateY(115%);animation:rise 1.1s cubic-bezier(.16,1,.3,1) forwards;animation-delay:var(--d,0s);}
+  @keyframes rise{to{transform:translateY(0);}}
+  .hero-brush{position:relative;}
+  .hero-brush svg{position:absolute;left:-6%;bottom:-14%;width:112%;height:auto;opacity:0;animation:draw 1.2s ease forwards;animation-delay:2.1s;stroke-dasharray:400;stroke-dashoffset:400;}
+  @keyframes draw{to{stroke-dashoffset:0;opacity:.9;}}
+  .hero-sub{max-width:560px;margin-top:44px;font-size:1.15rem;color:rgba(255,255,255,.78);font-family:'Playfair Display',serif;font-style:italic;line-height:1.6;}
+  .hero-ctas{display:flex;gap:18px;margin-top:48px;flex-wrap:wrap;opacity:0;animation:fadeUp 1s ease forwards;animation-delay:2.4s;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:17px 34px;border-radius:100px;font-weight:700;font-size:.95rem;letter-spacing:.02em;transition:transform .25s,box-shadow .25s;}
+  .btn-gold{background:var(--gold-grad);color:var(--navy);box-shadow:0 14px 40px rgba(212,161,58,.35);}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 20px 55px rgba(212,161,58,.5);}
+  .btn-ghost{border:1.5px solid rgba(255,255,255,.4);color:#fff;}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);}
+  .hero-meta{display:flex;gap:50px;margin-top:70px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:30px;}
+  .hm{display:flex;flex-direction:column;gap:4px;}
+  .hm .num{font-size:1.9rem;font-weight:800;color:var(--accent-2);line-height:1;}
+  .hm .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+  .hero-portrait{position:absolute;right:2%;bottom:4%;width:clamp(280px,31vw,460px);height:auto;opacity:0;animation:fadeIn 1.4s ease forwards;animation-delay:1.8s;pointer-events:none;filter:drop-shadow(0 40px 80px rgba(0,0,0,.6));will-change:transform;}
+  @keyframes fadeIn{to{opacity:1;}}
+  .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+  .scroll-cue::after{content:"";display:block;width:1px;height:36px;background:linear-gradient(var(--accent),transparent);margin:12px auto 0;animation:cue 1.8s infinite;}
+  @keyframes cue{0%,100%{transform:scaleY(.5);opacity:.4;}50%{transform:scaleY(1);opacity:1;}}
+
+  /* ===== BÖLÜM BAŞLIKLARI (mask reveal) ===== */
+  .section{padding:120px 42px;position:relative;overflow:hidden;}
+  .section-inner{max-width:1200px;margin:0 auto;}
+  .sec-head{margin-bottom:70px;}
+  .sec-title{font-size:clamp(2.2rem,5.5vw,4.4rem);font-weight:800;letter-spacing:-.015em;line-height:1.05;margin-top:16px;}
+
+  /* ===== YAZILAR (tam genişlik renk blokları — louisansa) ===== */
+  .work-list{display:flex;flex-direction:column;}
+  .work-item{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding:46px 8px;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer;transition:background .5s,padding .5s;}
+  .work-item:first-child{border-top:1px solid rgba(255,255,255,.1);}
+  .work-item:hover{background:rgba(255,255,255,.04);padding-left:20px;padding-right:20px;}
+  .work-cat{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-2);margin-bottom:16px;}
+  .work-title{font-size:clamp(1.4rem,3.4vw,2.6rem);font-weight:700;letter-spacing:-.01em;line-height:1.15;max-width:22ch;}
+  .work-date{font-size:.85rem;color:rgba(255,255,255,.5);font-family:'Playfair Display',serif;font-style:italic;white-space:nowrap;}
+  .work-desc{max-width:60ch;color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.6;margin-top:10px;transition:color .3s;}
+  .work-item:hover .work-desc{color:rgba(255,255,255,.85);}
+  .work-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0;}
+  .work-arrow{font-size:1.4rem;color:var(--accent);opacity:0;transform:translateX(-12px);transition:all .4s;}
+  .work-item:hover .work-arrow{opacity:1;transform:translateX(0);}
+  .work-tag{display:inline-block;background:rgba(212,161,58,.15);border:1px solid rgba(212,161,58,.3);color:var(--accent-2);font-size:.7rem;letter-spacing:.08em;padding:4px 12px;border-radius:50px;margin-top:12px;}
+
+  /* ===== HİZMETLER (renk blokları grid) ===== */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.08);}
+  .svc-card{background:var(--navy);padding:44px 36px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:background .4s,transform .3s;}
+  .svc-card:hover{background:var(--navy-2);}
+  .svc-num{font-size:.78rem;color:var(--accent);letter-spacing:.12em;font-weight:600;}
+  .svc-icon{font-size:1.8rem;margin-bottom:auto;}
+  .svc-card h3{font-size:1.35rem;font-weight:700;margin:18px 0 12px;line-height:1.2;}
+  .svc-card p{color:rgba(255,255,255,.6);font-size:.92rem;}
+
+  /* ===== İLGİ ALANLARI (yatay kayan chip'ler) ===== */
+  .marquee{overflow:hidden;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:26px 0;}
+  .marquee-track{display:flex;gap:48px;width:max-content;animation:scrollX 32s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes scrollX{to{transform:translateX(-50%);}}
+  .mq-item{display:flex;align-items:center;gap:16px;font-size:1.5rem;font-weight:700;white-space:nowrap;color:rgba(255,255,255,.85);}
+  .mq-item .dot{width:8px;height:8px;background:var(--accent);border-radius:50%;}
+
+  /* ===== BIO (serif, iki sütun) ===== */
+  .bio{background:var(--paper);color:var(--ink);position:relative;overflow:hidden;}
+  .bio .eyebrow{color:var(--accent);}
+  .bio-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;}
+  .bio-photo{position:relative;}
+  .bio-photo img{width:100%;height:auto;filter:drop-shadow(0 30px 50px rgba(11,27,51,.25));}
+  .bio-photo::after{content:"";position:absolute;inset:auto 0 -20px 0;height:2px;background:var(--gold-grad);opacity:.5;}
+  .bio-content .eyebrow{margin-bottom:16px;}
+  .bio-quote{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.35;max-width:22ch;margin:34px 0 40px;}
+  .bio-quote .gold{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .bio-cols{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  .bio-cols p{color:#3a4656;font-size:1rem;line-height:1.85;}
+  .bio-cols p + p{margin-top:16px;}
+  .bio-cols strong{color:var(--ink);}
+
+  /* ===== YOLCULUK (zaman çizelgesi) ===== */
+  .journey{display:flex;flex-direction:column;}
+  .j-item{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid rgba(255,255,255,.1);}
+  .j-item:first-child{border-top:1px solid rgba(255,255,255,.1);}
+  .j-year{font-size:1.2rem;font-weight:800;color:var(--accent-2);}
+  .j-body h4{font-size:1.5rem;font-weight:700;margin-bottom:10px;}
+  .j-body p{color:rgba(255,255,255,.6);max-width:60ch;}
+
+  /* ===== İLETİŞİM (dev başlık + linkler) ===== */
+  .contact{padding:120px 42px 160px;position:relative;overflow:hidden;}
+  .contact-title{font-size:clamp(2.6rem,7vw,5.5rem);font-weight:900;line-height:1.03;margin-bottom:70px;}
+  .contact-title .accent{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .contact-links{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.1);max-width:900px;}
+  .clink{background:var(--navy);padding:40px 36px;display:flex;justify-content:space-between;align-items:center;transition:background .35s;}
+  .clink:hover{background:var(--navy-2);}
+  .clink .lbl{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px;}
+  .clink .val{font-size:1.15rem;font-weight:600;}
+  .clink .arr{color:var(--accent);font-size:1.3rem;opacity:0;transform:translateX(-8px);transition:all .35s;}
+  .clink:hover .arr{opacity:1;transform:translateX(0);}
+
+  /* ===== FOOTER ===== */
+  footer{border-top:1px solid rgba(255,255,255,.08);padding:40px 42px;}
+  .foot-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .foot-brand{font-weight:800;}
+  .foot-brand em{font-style:normal;color:var(--accent-2);}
+  .foot-copy{font-size:.8rem;color:rgba(255,255,255,.4);}
+
+  /* ===== REVEAL ===== */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ===== SİNEMATİK GEÇİŞLER ===== */
+  /* Blur'dan netliğe sinematik giriş */
+  .cinema-enter{opacity:0;filter:blur(14px) saturate(1.4);transform:scale(1.04);transition:opacity 1s ease,filter 1s ease,transform 1.1s cubic-bezier(.16,1,.3,1);}
+  .cinema-enter.in-view{opacity:1;filter:blur(0) saturate(1);transform:scale(1);}
+
+  /* Başlık: soldan sinematik kayma */
+  .cinema-title{clip-path:inset(0 100% 0 0);transition:clip-path 1.2s cubic-bezier(.77,0,.18,1);}
+  .cinema-title.in-view{clip-path:inset(0 0 0 0);}
+
+  /* Yatay film şeridi çizgileri */
+  .film-lines{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;z-index:1;opacity:0;transition:opacity 1s ease;}
+  .film-lines.in-view{opacity:1;}
+  .film-lines::before,.film-lines::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:scaleX(0);transition:transform 1.4s cubic-bezier(.16,1,.3,1) .2s;}
+  .film-lines::before{top:14px;}
+  .film-lines::after{bottom:14px;}
+  .film-lines.in-view::before,.film-lines.in-view::after{transform:scaleX(1);}
+  /* Bio açık zeminde film şeridi — altın yerine koyu kontrast çizgi */
+  .bio .film-lines::before,.bio .film-lines::after{background:linear-gradient(90deg,transparent,var(--ink),transparent);}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:960px){
+    nav{padding:20px 24px;}
+    .hero,.section,.contact{padding-left:24px;padding-right:24px;}
+    .hero-portrait{position:static;margin:40px auto 0;width:220px;}
+    .svc-grid{grid-template-columns:1fr;}
+    .bio-layout{grid-template-columns:1fr;gap:50px;}
+    .bio-photo{max-width:380px;margin:0 auto;}
+    .bio-cols{grid-template-columns:1fr;gap:30px;}
+    .j-item{grid-template-columns:1fr;gap:14px;}
+    .contact-links{grid-template-columns:1fr;}
+    .hero-meta{gap:30px;}
+    .nav-links{position:fixed;top:0;right:-100%;flex-direction:column;justify-content:center;background:var(--navy);width:70%;height:100vh;padding:40px;transition:right .4s;gap:34px;}
+    .nav-links.open{right:0;}
+    .burger{display:flex;z-index:110;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">Erim <em>ONAN</em></div>
+  <button class="burger" id="burger" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks" aria-label="Ana menü">
+    <a href="#yazilar">Yazılar</a>
+    <a href="#hizmetler">Hizmetler</a>
+    <a href="#bio">Hakkımda</a>
+    <a href="#yolculuk">Yolculuk</a>
+    <a href="#iletisim" class="nav-btn">İletişim</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow eyebrow">Gazeteci · Yazar · Dijital Dönüşüm &amp; Verimlilik Danışmanı — İstanbul</div>
+
+    <h1 class="hero-title">
+      <span class="word"><span class="w" style="--d:.15s">Bugünü</span></span>&nbsp;
+      <span class="word"><span class="w" style="--d:.25s">anlamak,</span></span><br>
+      <span class="word"><span class="w" style="--d:.35s">yarını</span></span>&nbsp;
+      <span class="hero-brush"><span class="word"><span class="w" style="--d:.45s"><span class="accent">yönetmek</span></span></span>
+        <svg viewBox="0 0 400 60" fill="none">
+          <path d="M6 48 C 90 20, 210 12, 394 22" stroke="#e8c46b" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+        </svg>
+      </span><br>
+      <span class="word"><span class="w" style="--d:.55s">için.</span></span>
+    </h1>
+
+    <p class="hero-sub">"Bir gazetecinin kalemi, bir danışmanın vizyonu; ekonomi, teknoloji ve stratejiyi geleceğin yönetiminde buluşturuyorum."</p>
+
+    <div class="hero-ctas">
+      <a href="#iletisim" class="btn btn-gold">İş Birliği Yapalım →</a>
+      <a href="#yazilar" class="btn btn-ghost">Yazılarımı Oku</a>
+    </div>
+
+    <div class="hero-meta">
+      <div class="hm"><span class="num">23+</span><span class="lbl">Yıl Deneyim</span></div>
+      <div class="hm"><span class="num">25</span><span class="lbl">Yıl Kariyer</span></div>
+      <div class="hm"><span class="num">59+</span><span class="lbl">Köşe Yazısı</span></div>
+      <div class="hm"><span class="num">2</span><span class="lbl">Kurumsal Rol</span></div>
+    </div>
+  </div>
+  <img class="hero-portrait" src="hero-dikey.png" alt="Erim ONAN" width="644" height="806" fetchpriority="high">
+  <div class="scroll-cue">Keşfet</div>
+</header>
+
+<!-- YAZILAR -->
+<section class="section" id="yazilar">
+  <div class="film-lines"></div>
+  <div class="section-inner cinema-enter">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Seçme Yazılar</span>
+      <h2 class="sec-title cinema-title"><span class="mask"><span class="line">Kalemden dökülenler</span></span></h2>
+    </div>
+    <div class="work-list">
+      <a class="work-item reveal" href="https://www.gelecekyonetim.com/yetenek-savasi-diye-bir-sey-yok-sadece-ucuz-isgucu-avi-var/" target="_blank">
+        <div>
+          <div class="work-cat">İnsan Kaynakları</div>
+          <div class="work-title">"Yetenek Savaşı" Diye Bir Şey Yok, Sadece Ucuz İşgücü Avı Var</div>
+          <p class="work-desc">On yıldır iş dünyasının en çok tekrarladığı "yetenek savaşı" söylemini masaya yatırıyor; şirketlerin parlak mühendisleri piyasanın altında maaşla ikna etme pratiğini, "stratejik yetenek yatırımı" etiketinin ardındaki gerçeği — kullan-at insan politikasının yumuşatılmış halini — keskin bir dille sorguluyor.</p>
+          <span class="work-tag">Çalışan Değeri · Şirket Politikası</span>
+        </div>
+        <div class="work-right">
+          <div class="work-date">27 Temmuz 2026</div>
+          <div class="work-arrow">→</div>
+        </div>
+      </a>
+      <a class="work-item reveal" href="https://www.gelecekyonetim.com/sen-oleceksin-verilerin-kole-kalacak/" target="_blank">
+        <div>
+          <div class="work-cat">Dijital Çağ · Etik</div>
+          <div class="work-title">Sen Öleceksin, Verilerin Köle Kalacak</div>
+          <p class="work-desc">Dijital çağda ölümün artık "yok olma haysiyeti" olmadığını anlatıyor: her mesaj, her fotoğraf, her arama, okyanus ötesindeki sunucularda birikerek senin adınla ticaret yapan, çürümeyen bir dijital kadavra inşa ediyor. Verinin küresel sermayenin en tekinsiz kölelik pazarına dönüştüğünü felsefi bir derinlikle irdeleyen edebi bir deneme.</p>
+          <span class="work-tag">Dijital Miras · Veri Etiği</span>
+        </div>
+        <div class="work-right">
+          <div class="work-date">11 Haziran 2026</div>
+          <div class="work-arrow">→</div>
+        </div>
+      </a>
+      <a class="work-item reveal" href="https://www.gelecekyonetim.com/ticaret-ne-zaman-bir-istihbarat-operasyonuna-donustu/" target="_blank">
+        <div>
+          <div class="work-cat">Ekonomi · Strateji</div>
+          <div class="work-title">Ticaret Ne Zaman Bir İstihbarat Operasyonuna Dönüştü?</div>
+          <p class="work-desc">Maslak'ın cam kulelerinden küresel ticaretin gölgeli dinamiklerine uzanan bir analiz: modern ticaretin, veri akışları ve stratejik hamlelerle nasıl bir istihbarat operasyonu görünümüne büründüğünü, kurumsal karar mekanizmaları üzerinden inceliyor.</p>
+          <span class="work-tag">Ticaret · Veri İstihbaratı</span>
+        </div>
+        <div class="work-right">
+          <div class="work-date">26 Mayıs 2026</div>
+          <div class="work-arrow">→</div>
+        </div>
+      </a>
+      <a class="work-item reveal" href="https://www.gelecekyonetim.com/on-bes-yildir-ayni-krizi-yasiyoruz-hala-sasiriyoruz/" target="_blank">
+        <div>
+          <div class="work-cat">Ekonomi</div>
+          <div class="work-title">On Beş Yıldır Aynı Krizi Yaşıyoruz, Hâlâ Şaşırıyoruz</div>
+          <p class="work-desc">Türk ihracatının Almanya'ya bağımlılığını Bursa'da bir ustabaşıyla kurduğu diyalogdan yola çıkarak anlatıyor: Avrupa'nın motoru her yavaşladığında en uçtaki vagon biz sallanıyoruz. On beş yıldır aynı senaryoyu gördüğümüze göre bunun artık bir politika eksikliği değil, kolektif bir tercih olduğunu savunuyor.</p>
+          <span class="work-tag">İhracat · Tedarik Zinciri</span>
+        </div>
+        <div class="work-right">
+          <div class="work-date">13 Mayıs 2026</div>
+          <div class="work-arrow">→</div>
+        </div>
+      </a>
+      <a class="work-item reveal" href="https://www.gelecekyonetim.com/kirilma-luksun-yok/" target="_blank">
+        <div>
+          <div class="work-cat">Liderlik · Yönetim</div>
+          <div class="work-title">Kırılma Lüksün Yok</div>
+          <p class="work-desc">Toplantı odalarının beyaz ışığı altında "dayanıklılık" (resilience) söylemleri ile gerçek arasındaki mesafeyi inceliyor; İK direktörlerinin broşürlerle sunduğu dayanıklılık eğitimlerinin, aslında kırılmayı bir lüks sayan kurum kültürünü nasıl sürdürdüğünü sorguluyor.</p>
+          <span class="work-tag">Dayanıklılık · Kurum Kültürü</span>
+        </div>
+        <div class="work-right">
+          <div class="work-date">27 Nisan 2026</div>
+          <div class="work-arrow">→</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- İLGİ ALANLARI (marquee) -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="mq-item"><span class="dot"></span>Ekonomi</span>
+    <span class="mq-item"><span class="dot"></span>Yapay Zekâ</span>
+    <span class="mq-item"><span class="dot"></span>Strateji</span>
+    <span class="mq-item"><span class="dot"></span>Gelecek Vizyonu</span>
+    <span class="mq-item"><span class="dot"></span>Yönetim &amp; Liderlik</span>
+    <span class="mq-item"><span class="dot"></span>Dijital Dönüşüm</span>
+    <span class="mq-item"><span class="dot"></span>Verimlilik</span>
+    <span class="mq-item"><span class="dot"></span>Sürdürülebilirlik</span>
+    <span class="mq-item"><span class="dot"></span>Teknoloji</span>
+    <span class="mq-item"><span class="dot"></span>İnsan Kaynakları</span>
+    <span class="mq-item"><span class="dot"></span>Ekonomi</span>
+    <span class="mq-item"><span class="dot"></span>Yapay Zekâ</span>
+    <span class="mq-item"><span class="dot"></span>Strateji</span>
+    <span class="mq-item"><span class="dot"></span>Gelecek Vizyonu</span>
+    <span class="mq-item"><span class="dot"></span>Yönetim &amp; Liderlik</span>
+    <span class="mq-item"><span class="dot"></span>Dijital Dönüşüm</span>
+    <span class="mq-item"><span class="dot"></span>Verimlilik</span>
+    <span class="mq-item"><span class="dot"></span>Sürdürülebilirlik</span>
+    <span class="mq-item"><span class="dot"></span>Teknoloji</span>
+    <span class="mq-item"><span class="dot"></span>İnsan Kaynakları</span>
+  </div>
+</div>
+
+<!-- HİZMETLER -->
+<section class="section" id="hizmetler">
+  <div class="film-lines"></div>
+  <div class="section-inner cinema-enter">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Hizmetler</span>
+      <h2 class="sec-title cinema-title"><span class="mask"><span class="line">Ne yapıyorum?</span></span></h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal"><span class="svc-num">01</span><span class="svc-icon">📰</span><h3>Gazetecilik &amp; Köşe Yazarlığı</h3><p>Ekonomi, teknoloji ve strateji üzerine özgün analizler.</p></div>
+      <div class="svc-card reveal"><span class="svc-num">02</span><span class="svc-icon">⚙️</span><h3>Dijital Dönüşüm Danışmanlığı</h3><p>İşletmelerde verimlilik artırma ve süreç iyileştirme.</p></div>
+      <div class="svc-card reveal"><span class="svc-num">03</span><span class="svc-icon">🤖</span><h3>Yapay Zekâ Eğitimleri</h3><p>Medya ve kurumlara yapay zekâ destekli içerik eğitimleri.</p></div>
+      <div class="svc-card reveal"><span class="svc-num">04</span><span class="svc-icon">📈</span><h3>Ticari Dönüşüm &amp; FMCG Danışmanlığı</h3><p>Hızlı tüketim malları ve satış ekiplerinde operasyonel verimlilik, fiyat-gelir optimizasyonu ve yapay zekâ destekli karar sistemleri.</p></div>
+      <div class="svc-card reveal"><span class="svc-num">05</span><span class="svc-icon">🎤</span><h3>Konuşma &amp; Röportaj</h3><p>Panel, söyleşi ve strateji konuşmalarına katılım.</p></div>
+      <div class="svc-card reveal"><span class="svc-num">06</span><span class="svc-icon">🌍</span><h3>Kurumsal İçerik &amp; Medya</h3><p>Kurumsal içerik ve dijital medya stratejileri.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section class="section bio" id="bio">
+  <div class="film-lines"></div>
+  <div class="section-inner cinema-enter">
+    <div class="bio-layout">
+      <div class="bio-photo reveal"><img src="bio-cutout.png" alt="Erim ONAN" width="900" height="1600" loading="lazy"></div>
+      <div class="bio-content">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Hakkımda</span>
+          <h2 class="sec-title cinema-title">Basının kaleminden iş dünyasının vizyonuna</h2>
+        </div>
+        <div class="bio-quote reveal">"Bugünü anlamak, <span class="gold">yarını yönetmek</span> için."</div>
+        <div class="bio-cols reveal">
+          <div>
+            <p>Kariyerim, Tekirdağ'ın sokaklarında liseli bir gencin donmuş ellerinde gazete dağıtmasıyla başladı. O günlerde, köşe yazarlarının satırlarında saklı bilgelikten ilham aldım. Yıllar sonra, <strong>25 yıllık beyaz yakalı profesyonel</strong> kariyerimin ardından, o çocukluk hayalini gerçekleştirerek <strong>Gelecek Yönetim Gazetesi</strong>'nin temellerini attım.</p>
+            <p>Bugün, <strong>23 yılı aşkın satış ve operasyon yönetimi deneyimimle</strong>, uluslararası firmalardaki yöneticilik tecrübemi, yapay zekâ entegrasyonunu ve verimlilik stratejilerini birleştirerek işletmelere dijital dönüşüm yolunda rehberlik ediyorum. <strong>Çukurova Üniversitesi</strong> eğitimim ve <strong>Indigonix System Intelligence</strong>'ta <strong>Partner – Commercial Transformation &amp; FMCG Lead</strong> olarak yürüttüğüm çalışmalar, bu birikimi kurumsal dönüşüm projelerine taşıyor.</p>
+          </div>
+          <div>
+            <p>Medya profesyonellerine <strong>yapay zekâ destekli içerik üretimi</strong> eğitimleri veriyor, <strong>TİMBİR Akademi</strong>'de eğitmenlik yapıyorum. Hızlı tüketim malları (FMCG) ve satış ekiplerinde operasyonel verimlilik, fiyat-gelir optimizasyonu ve yapay zekâ ile karar destek sistemleri üzerine kurumlara danışmanlık sağlıyorum.</p>
+            <p>Köşe yazılarım ve danışmanlıklarımla ekonomi, teknoloji, strateji ve gelecek vizyonu alanlarında katma değer üretiyorum. Bugünü anlamak yetinmez; amacım, bugünün verilerini yarının stratejisine dönüştürmek.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOLCULUK -->
+<section class="section" id="yolculuk">
+  <div class="film-lines"></div>
+  <div class="section-inner cinema-enter">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Yolculuk</span>
+      <h2 class="sec-title cinema-title"><span class="mask"><span class="line">Bir tutkunun hikâyesi</span></span></h2>
+    </div>
+    <div class="journey">
+      <div class="j-item reveal">
+        <div class="j-year">Başlangıç</div>
+        <div class="j-body"><h4>Tekirdağ'da Gazete Dağıtımı</h4><p>Liseli yıllarında donmuş ellerinde gazetelerle köşe yazarlarının bilgeliğini keşfetti; gazetecilik tutkusu burada filizlendi.</p></div>
+      </div>
+      <div class="j-item reveal">
+        <div class="j-year">25 Yıl</div>
+        <div class="j-body"><h4>Beyaz Yakalı Profesyonel</h4><p>Satış ve operasyon yönetiminde, uluslararası firmalarda yöneticilik deneyimi kazandı. Çukurova Üniversitesi'nde temellenen akademik birikim, kurumsal hayatta pratiğe dönüştü.</p></div>
+      </div>
+      <div class="j-item reveal">
+        <div class="j-year">2023</div>
+        <div class="j-body"><h4>Gelecek Yönetim Gazetesi</h4><p>Çocukluk hayalini gerçekleştirerek gazetenin temellerini attı, vizyoner yazarlarla yola çıktı. Bugünü anlamak, yarını yönetmek misyonuyla yayın hayatını sürdürüyor.</p></div>
+      </div>
+      <div class="j-item reveal">
+        <div class="j-year">2026</div>
+        <div class="j-body"><h4>Indigonix System Intelligence</h4><p>Partner – Commercial Transformation &amp; FMCG Lead olarak hızlı tüketim malları sektöründe ticari dönüşüm ve yapay zekâ destekli verimlilik projelerini yönetiyor.</p></div>
+      </div>
+      <div class="j-item reveal">
+        <div class="j-year">Bugün</div>
+        <div class="j-body"><h4>Yazar &amp; Eğitmen</h4><p>TİMBİR Akademi'de yapay zekâ destekli içerik üretimi eğitimleri veriyor; köşe yazıları ve kurumsal danışmanlıklarla medyaya ve iş dünyasına katma değer katıyor.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- İLETİŞİM -->
+<section class="contact" id="iletisim">
+  <div class="film-lines"></div>
+  <div class="section-inner cinema-enter">
+    <div class="eyebrow">İletişim</div>
+    <h2 class="contact-title reveal cinema-title">Geleceği <span class="accent">birlikte</span> yönetelim</h2>
+    <div class="contact-links reveal">
+      <a class="clink" href="https://www.gelecekyonetim.com/" target="_blank">
+        <div><div class="lbl">Gazete</div><div class="val">gelecekyonetim.com</div></div><span class="arr">→</span>
+      </a>
+      <a class="clink" href="https://www.linkedin.com/in/erim-onan-a5576a2b0" target="_blank">
+        <div><div class="lbl">LinkedIn</div><div class="val">/in/erim-onan</div></div><span class="arr">→</span>
+      </a>
+      <a class="clink" href="https://www.instagram.com/erim.onan" target="_blank">
+        <div><div class="lbl">Instagram</div><div class="val">@erim.onan</div></div><span class="arr">→</span>
+      </a>
+      <a class="clink" href="https://x.com/erimonan" target="_blank">
+        <div><div class="lbl">X (Twitter)</div><div class="val">@erimonan</div></div><span class="arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">Erim <em>ONAN</em></div>
+    <div class="foot-copy">© 2026 Erim ONAN · Tüm hakları saklıdır.</div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // IntersectionObserver: reveal + mask reveal + sinematik
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        // Alt elemanları da tetikle (mask, cinema-title)
+        e.target.querySelectorAll('.mask, .cinema-title').forEach(c => c.classList.add('in-view'));
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal, .mask, .cinema-enter, .film-lines').forEach(el => io.observe(el));
+  // cinema-title başlıklar, ebeveyn reveal/in-view olduğunda tetiklenir.
+  // Başlık elemanları küçük olduğundan ve clip-path ile gizli kaldıklarından
+  // ayrıca observer'a eklenmezler (ebevenler üzerinden tetiklenir).
+
+  // ==== SİNEMATİK SCROLL EFEKTLERİ (rAF tabanlı parallax) ====
+  const heroGrid = document.querySelector('.hero-grid');
+  const heroGlow = document.querySelector('.hero-glow');
+  const heroPortrait = document.querySelector('.hero-portrait');
+  let ticking = false;
+
+  function parallax() {
+    const y = window.scrollY;
+    // Hero elemanları yavaşça ayrı hızlarda kayar (parallax derinlik)
+    if (heroGrid && y < window.innerHeight) {
+      heroGrid.style.transform = `translateY(${y * 0.18}px)`;
+    }
+    if (heroGlow && y < window.innerHeight) {
+      heroGlow.style.transform = `translateY(${y * -0.08}px)`;
+    }
+    if (heroPortrait && y < window.innerHeight) {
+      heroPortrait.style.transform = `translateY(${y * 0.06}px)`;
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(parallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Bölümler arası sinematik geçiş: her section'a bir film-lines ve
+  // cinema-enter animasyonu IntersectionObserver ile zaten tetikleniyor.
+  // Hero portresi CSS `animation:fadeIn` ile kendiliğinden belirir.
+</script>
+</body>
+</html>
