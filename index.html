@@ -350,11 +350,18 @@ gsap.registerPlugin(ScrollTrigger);
         <span class="word"><span class="w" style="--d:.35s">yarını</span></span>&nbsp;
         <span class="hero-brush">
           <span class="word"><span class="w" style="--d:.45s"><span class="accent">yönetmek</span></span></span>
-          <svg viewBox="0 0 420 60" fill="none" aria-hidden="true">
-            <!-- Kalem çizgisi: ince, zarif, soluk -->
-            <path d="M14 46 C 85 42, 160 40, 245 41 S 350 44, 405 42" stroke="#c9973d" stroke-width="4" stroke-linecap="round" opacity=".45"/>
-            <!-- Hafif ikincil vurgu -->
-            <path d="M18 47 C 95 44, 175 42, 255 43 S 355 46, 400 44" stroke="#e8c46b" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+          <svg viewBox="0 0 420 70" fill="none" aria-hidden="true">
+            <!-- Yumuşak fırça zemin -->
+            <path d="M12 52 C 75 47, 140 44, 210 46 S 335 50, 405 46" stroke="#c9973d" stroke-width="18" stroke-linecap="round" opacity=".22" filter="url(#brushBlur)"/>
+            <!-- Ana fırça darbesi -->
+            <path d="M10 50 C 72 46, 138 43, 208 45 S 330 48, 408 45" stroke="#d4a13a" stroke-width="11" stroke-linecap="round" opacity=".55"/>
+            <!-- İnce aydınlık vurgu -->
+            <path d="M18 49 C 90 46, 165 44, 235 45 S 345 47, 398 45" stroke="#e8c46b" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+            <defs>
+              <filter id="brushBlur" x="-10%" y="-30%" width="120%" height="160%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+              </filter>
+            </defs>
           </svg>
         </span><br>
         <span class="word"><span class="w" style="--d:.55s">için.</span></span>
